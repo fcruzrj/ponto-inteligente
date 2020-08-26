@@ -10,15 +10,12 @@ export class HttpUtilService {
 
   headers(): any {
     let httpHeaders: HttpHeaders = new HttpHeaders();
-    console.log(localStorage['token']);
-
+    
     if (localStorage['token']) {
-      console.log('entrei');
       httpHeaders = httpHeaders.set('Authorization', `Bearer ${localStorage['token']}`);
-      console.log(httpHeaders);
     }
 
-    return {header: httpHeaders};
+    return {headers: httpHeaders};
   }
 
   obterIdUsuario(): string {
