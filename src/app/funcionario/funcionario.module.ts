@@ -11,11 +11,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpUtilService } from '../shared';
+import { HttpUtilService, PtBrMatPaginationIntl } from '../shared';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -37,11 +38,13 @@ import { HttpUtilService } from '../shared';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatCardModule
+    MatCardModule,
+    SharedModule
   ],
   providers: [
     HttpUtilService,
-    LancamentoService
+    LancamentoService,
+    {provide: MatPaginatorIntl, useClass: PtBrMatPaginationIntl}
   ]
 })
 export class FuncionarioModule { }
