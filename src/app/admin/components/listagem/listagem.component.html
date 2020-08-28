@@ -1,11 +1,11 @@
-<a mat-button color="warn" [routerLink]="['/funcionario']">
+<a mat-button color="warn" [routerLink]="['/admin/cadastro']" *ngIf="funcionarioId">
   Adicionar lançamento
 </a>
 
-<mat-table [dataSource]="dataSource" matSort>
+<mat-table [dataSource]="dataSource" matSort (matSortChange)="ordenar($event)">
   <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
   <mat-row *matRowDef="let row; columns: colunas;"></mat-row>
-  
+
   <ng-container matColumnDef="data">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Data </mat-header-cell>
     <mat-cell *matCellDef="let lancamento"> {{lancamento.data | data}} </mat-cell>
@@ -20,10 +20,23 @@
     <mat-header-cell *matHeaderCellDef> Localização </mat-header-cell>
     <mat-cell *matCellDef="let lancamento"> {{lancamento.localizacao}} </mat-cell>
   </ng-container>
+
+  <ng-container matColumnDef="acao">
+    <mat-header-cell *matHeaderCellDef> Ação </mat-header-cell>
+    <mat-cell *matCellDef="let lancamento">
+      <a routerLink="{{ '/admin/atualizacao/' + lancamento.id }}" >
+        <mat-icon matTooltip="Editar lançamento">create</mat-icon>
+      </a>
+
+      <a (click)="remover(lancamento.id)" style="cursor: pointer;">
+        <mat-icon matTooltip="Remover lançamento">clear</mat-icon>
+      </a>
+    </mat-cell>
+  </ng-container>
 </mat-table>
 
-<mat-paginator 
-  #paginator 
-  [pageSize]="10" 
-  [pageSizeOptions]="[5, 10, 15, 25]">
+<mat-paginator
+  [length]="totalLancamentos"
+  [pageSize]="25"
+  (page)="paginar($event)">
 </mat-paginator>
