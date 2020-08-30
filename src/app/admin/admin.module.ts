@@ -1,3 +1,4 @@
+import { AdminGuard } from './services/admin-guard.service';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -59,7 +60,8 @@ import { LancamentoService, HttpUtilService, PtBrMatPaginationIntl, FuncionarioS
     MatPaginatorIntl,
     FuncionarioService,
     {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
-    {provide: MatPaginatorIntl, useClass: PtBrMatPaginationIntl}
+    {provide: MatPaginatorIntl, useClass: PtBrMatPaginationIntl},
+    AdminGuard
   ],
   entryComponents: [ConfirmarDialog]
 })
